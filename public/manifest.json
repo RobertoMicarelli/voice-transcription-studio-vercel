@@ -1,0 +1,80 @@
+{
+  "short_name": "Voice Studio",
+  "name": "Voice Transcription Studio",
+  "description": "Registra, trascrivi e crea mappe mentali con AI",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4F46E5",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "it",
+  "categories": ["productivity", "education", "utilities"],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-narrow.png", 
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuova Registrazione",
+      "short_name": "Registra",
+      "description": "Inizia una nuova registrazione vocale",
+      "url": "/?action=record",
+      "icons": [
+        {
+          "src": "icon-record.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Storico",
+      "short_name": "Storico", 
+      "description": "Visualizza registrazioni precedenti",
+      "url": "/?action=history",
+      "icons": [
+        {
+          "src": "icon-history.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  }
+}

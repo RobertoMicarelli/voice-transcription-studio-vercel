@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4F46E5" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Voice Transcription Studio - Registra, trascrivi e crea mappe mentali con intelligenza artificiale. App completa per trascrizione vocale automatica." />
+    <meta name="keywords" content="trascrizione vocale, registrazione audio, mappe mentali, AI, intelligenza artificiale, speech to text, mindmap" />
+    <meta name="author" content="Voice Transcription Studio" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://voice-transcription-studio-vercel.vercel.app/" />
+    <meta property="og:title" content="Voice Transcription Studio Vercel - Trascrizione Vocale con AI" />
+    <meta property="og:description" content="Registra, trascrivi e crea mappe mentali automaticamente con intelligenza artificiale. Interfaccia moderna e responsive." />
+    <meta property="og:image" content="%PUBLIC_URL%/social-preview.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://voice-transcription-studio-vercel.vercel.app/" />
+    <meta property="twitter:title" content="Voice Transcription Studio Vercel - Trascrizione Vocale con AI" />
+    <meta property="twitter:description" content="Registra, trascrivi e crea mappe mentali automaticamente con intelligenza artificiale." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/social-preview.png" />
+    
+    <!-- PWA Meta Tags -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
+    
+    <!-- Preconnect per performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts per tipografia migliorata -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN per compatibilità -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>Voice Transcription Studio Vercel - Trascrizione Vocale con AI</title>
+    
+    <style>
+      /* Stili inline per caricamento immediato */
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        margin: 0;
+        padding: 0;
+      }
+
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+          monospace;
+      }
+
+      /* Loading screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top: 5px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loading-text {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      /* Prevenzione FOUC (Flash of Unstyled Content) */
+      .app-container {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      .app-container.loaded {
+        opacity: 1;
+      }
+
+      /* Responsività migliorata */
+      @media (max-width: 768px) {
+        .loading-text {
+          font-size: 1rem;
+          padding: 0 20px;
+        }
+      }
+
+      /* Supporto per high-DPI displays */
+      @media only screen and (-webkit-min-device-pixel-ratio: 2),
+             only screen and (min--moz-device-pixel-ratio: 2),
+             only screen and (-o-min-device-pixel-ratio: 2/1),
+             only screen and (min-device-pixel-ratio: 2),
+             only screen and (min-resolution: 192dpi),
+             only screen and (min-resolution: 2dppx) {
+        /* Ottimizzazioni per display Retina */
+      }
+
+      /* Supporto dark mode */
+      @media (prefers-color-scheme: dark) {
+        .loading-screen {
+          background: linear-gradient(135deg, #1e1b4b 0%, #581c87 100%);
+        }
+      }
+
+      /* Riduzione motion per accessibilità */
+      @media (prefers-reduced-motion: reduce) {
+        .loader {
+          animation: none;
+        }
+        
+        * {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <noscript>
+      <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <h1>JavaScript Richiesto</h1>
+        <p>Questa applicazione richiede JavaScript per funzionare correttamente.</p>
+        <p>Abilita JavaScript nel tuo browser e ricarica la pagina.</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loader"></div>
+      <div class="loading-text">
+        Caricamento Voice Transcription Studio...
+      </div>
+    </div>
+    
+    <!-- App Container -->
+    <div id="root" class="app-container"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      // Nascondi loading screen quando l'app è caricata
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('loading-screen');
+          const appContainer = document.querySelector('.app-container');
+          
+          if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }
+          
+          if (appContainer) {
+            appContainer.classList.add('loaded');
+          }
+        }, 1000); // Mostra loading per almeno 1 secondo
+      });
+
+      // Service Worker per PWA (opzionale)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js')
+            .then(function(registration) {
+              console.log('SW registrato con successo: ', registration.scope);
+            }, function(err) {
+              console.log('SW registrazione fallita: ', err);
+            });
+        });
+      }
+
+      // Performance monitoring
+      window.addEventListener('load', function() {
+        if ('performance' in window) {
+          const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+          console.log('Tempo di caricamento:', loadTime + 'ms');
+        }
+      });
+
+      // Error handling globale
+      window.addEventListener('error', function(e) {
+        console.error('Errore globale:', e.error);
+        // Puoi aggiungere qui un sistema di reporting errori
+      });
+
+      // Gestione orientamento device per mobile
+      window.addEventListener('orientationchange', function() {
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+        }, 100);
+      });
+    </script>
+    
+    <!-- Structured Data per SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Voice Transcription Studio",
+      "description": "Applicazione web per trascrizione vocale automatica e generazione di mappe mentali con intelligenza artificiale",
+      "url": "https://voice-transcription-studio-vercel.vercel.app/",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web Browser",
+      "permissions": "microphone",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Voice Transcription Studio"
+      }
+    }
+    </script>
+  </body>
+</html>

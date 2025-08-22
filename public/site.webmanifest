@@ -1,0 +1,34 @@
+{
+  "name": "Voice Studio - Trascrizione e Mappe",
+  "short_name": "VoiceStudio",
+  "lang": "it-IT",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuova Registrazione",
+      "url": "/?action=record",
+      "description": "Avvia una nuova trascrizione vocale"
+    },
+    {
+      "name": "Importa Markdown",
+      "url": "/?action=import",
+      "description": "Importa mappa mentale da Markdown"
+    }
+  ]
+}
