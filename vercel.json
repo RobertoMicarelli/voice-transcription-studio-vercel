@@ -1,15 +1,6 @@
 {
   "version": 2,
   "name": "voice-transcription-studio-vercel",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
   "routes": [
     {
       "src": "/static/(.*)",
@@ -30,10 +21,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
