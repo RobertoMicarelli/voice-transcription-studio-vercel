@@ -44,7 +44,7 @@ export class MindmapService {
             else {
               const chunks = this.splitIntoChunks(t, 100);
               markdown += `### 📌 Punto Chiave\n`;
-              chunks.forEach(c => (markdown += `- ${c}\n`));
+              chunks.forEach(chunk => (markdown += `- ${chunk}\n`));
             }
           }
         }
@@ -81,7 +81,8 @@ export class MindmapService {
     const per = 50;
     let part = 1;
     for (let i = 0; i < words.length; i += per) {
-      md += `### Parte ${part}\n- ${words.slice(i, i + per).join(' ')}\n\n`;
+      const chunk = words.slice(i, i + per).join(' ');
+      md += `### Parte ${part}\n- ${chunk}\n\n`;
       part++;
     }
     md += '## 🔍 Analisi\n\n';

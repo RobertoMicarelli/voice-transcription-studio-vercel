@@ -1,6 +1,6 @@
 // src/App.js - SISTEMA IFRAME FULLSCREEN + SCREENSHOT (auto-download) + cleanup menu
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, Square, Play, Trash2, FileText, Map, Download, Mail, Volume2, Loader, Calendar, Clock, MessageSquare, Settings, Camera } from 'lucide-react';
+import { Mic, Square, Play, Trash2, FileText, Map, Download, Mail, Volume2, Loader, Calendar, Clock, MessageSquare, Settings } from 'lucide-react';
 import { AudioService } from './services/audioService';
 import { TranscriptionService } from './services/transcriptionService';
 import { MindmapService } from './services/mindmapService';
@@ -23,7 +23,6 @@ const App = () => {
   const [recordingTime, setRecordingTime] = useState(0);
   const [apiKey, setApiKey] = useState('');
   const [currentMindmap, setCurrentMindmap] = useState(null);
-  const [isCreatingPng, setIsCreatingPng] = useState(false);
   const [processingStep, setProcessingStep] = useState('');
   
   // Servizi
@@ -32,7 +31,6 @@ const App = () => {
   const mindmapService = useRef(new MindmapService());
   const storageService = useRef(new StorageService());
 const opmlService = useRef(new OpmlService());   // ⬅️ aggiungi questa riga
-  const mapTitle = 'Voice Transcription Studio';
   const intervalRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -242,14 +240,7 @@ const opmlService = useRef(new OpmlService());   // ⬅️ aggiungi questa riga
     URL.revokeObjectURL(url);
   };
 
-  const downloadImage = (dataUrl, filename) => {
-    const a = document.createElement('a');
-    a.href = dataUrl;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+
 
   // Visualizza mappa in iframe fullscreen (rimane SOLO nella lista principale)
 const viewMindmap = (recording) => {
@@ -261,41 +252,7 @@ const viewMindmap = (recording) => {
     setShowMindmapModal(true);
   };
   
-  // Crea PNG (auto-download) dalla mappa
-  const createPngFromMindmap = async (recording) => {
-    if (!recording.mindmapHtml) {
-      alert('🗺️ Mappa mentale non disponibile per creare PNG.');
-      return;
-    }
 
-    setIsCreatingPng(true);
-    console.log('📸 Creando PNG da mappa mentale...');
-
-    try {
-      const pngDataUrl = await mindmapService.current.generatePngFromHtml(
-        recording.mindmapHtml, 
-        recording.title
-      );
-
-      if (pngDataUrl) {
-        const updatedRecording = { ...recording, mindmapPng: pngDataUrl };
-        try { await storageService.current.saveRecording(updatedRecording); } catch (_) {}
-        setRecordings(prev => prev.map(r => (r.id === recording.id ? updatedRecording : r)));
-        if (selectedRecording?.id === recording.id) setSelectedRecording(updatedRecording);
-
-        // ⬇️ Auto-download immediato
-        downloadImage(pngDataUrl, `${recording.title}_mindmap.png`);
-        alert('✅ PNG creato e scaricato.');
-      } else {
-        alert('❌ Errore durante la creazione del PNG.\n\nProva di nuovo o usa il download SVG nella vista mappa.');
-      }
-    } catch (error) {
-      console.error('❌ Errore creazione PNG:', error);
-      alert('❌ Errore durante la creazione del PNG:\n' + error.message);
-    } finally {
-      setIsCreatingPng(false);
-    }
-  };
   
  const convertMdToOpml = async (recording) => {
   if (!apiKey) { setShowSettingsModal(true); return; }
