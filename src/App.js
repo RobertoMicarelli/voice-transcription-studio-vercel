@@ -317,34 +317,34 @@ Cordiali saluti
   // Vista Dettagliata (menu ripulito)
  const DetailView = ({ recording }) => (
     <div className="space-y-6">
-      <div className="bg-white rounded-xl shadow-lg p-6">
+      <div className="rounded-xl shadow-lg p-6" style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
         {/* header e info invariati */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-gray-800">{recording.title}</h2>
-          <button onClick={() => setSelectedRecording(null)} className="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0094B5', fontFamily: '"Syne", sans-serif' }}>{recording.title}</h2>
+          <button onClick={() => setSelectedRecording(null)} style={{ color: '#F3832C', fontSize: '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#0094B5'} onMouseLeave={(e) => e.target.style.color = '#F3832C'}>×</button>
         </div>
 
         {/* cards info invariati */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="text-center p-4 bg-blue-50 rounded-lg">
-            <Calendar className="w-6 h-6 mx-auto mb-2 text-blue-600" />
-            <p className="text-sm text-gray-600">Data</p>
-            <p className="font-semibold">{recording.date}</p>
+          <div className="text-center p-4 rounded-lg" style={{ background: 'rgba(0, 148, 181, 0.1)', border: '1px solid rgba(0, 148, 181, 0.3)' }}>
+            <Calendar className="w-6 h-6 mx-auto mb-2" style={{ color: '#0094B5' }} />
+            <p style={{ fontSize: '0.875rem', color: '#F3832C' }}>Data</p>
+            <p style={{ fontWeight: 600, color: '#0094B5' }}>{recording.date}</p>
           </div>
-          <div className="text-center p-4 bg-green-50 rounded-lg">
-            <Clock className="w-6 h-6 mx-auto mb-2 text-green-600" />
-            <p className="text-sm text-gray-600">Ora</p>
-            <p className="font-semibold">{recording.time}</p>
+          <div className="text-center p-4 rounded-lg" style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+            <Clock className="w-6 h-6 mx-auto mb-2" style={{ color: '#0094B5' }} />
+            <p style={{ fontSize: '0.875rem', color: '#F3832C' }}>Ora</p>
+            <p style={{ fontWeight: 600, color: '#0094B5' }}>{recording.time}</p>
           </div>
-          <div className="text-center p-4 bg-purple-50 rounded-lg">
-            <Volume2 className="w-6 h-6 mx-auto mb-2 text-purple-600" />
-            <p className="text-sm text-gray-600">Durata</p>
-            <p className="font-semibold">{recording.duration}</p>
+          <div className="text-center p-4 rounded-lg" style={{ background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
+            <Volume2 className="w-6 h-6 mx-auto mb-2" style={{ color: '#0094B5' }} />
+            <p style={{ fontSize: '0.875rem', color: '#F3832C' }}>Durata</p>
+            <p style={{ fontWeight: 600, color: '#0094B5' }}>{recording.duration}</p>
           </div>
-          <div className="text-center p-4 bg-yellow-50 rounded-lg">
-            <MessageSquare className="w-6 h-6 mx-auto mb-2 text-yellow-600" />
-            <p className="text-sm text-gray-600">Caption</p>
-            <p className="font-semibold text-xs">{recording.caption.substring(0, 20)}...</p>
+          <div className="text-center p-4 rounded-lg" style={{ background: 'rgba(234, 179, 8, 0.1)', border: '1px solid rgba(234, 179, 8, 0.3)' }}>
+            <MessageSquare className="w-6 h-6 mx-auto mb-2" style={{ color: '#0094B5' }} />
+            <p style={{ fontSize: '0.875rem', color: '#F3832C' }}>Caption</p>
+            <p style={{ fontWeight: 600, fontSize: '0.75rem', color: '#0094B5' }}>{recording.caption.substring(0, 20)}...</p>
           </div>
         </div>
 
@@ -415,19 +415,47 @@ Cordiali saluti
 
         {/* preview raw/markdown invariati */}
         <div className="mt-6 space-y-4">
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold mb-3 text-gray-800 flex items-center"><FileText className="w-5 h-5 mr-2 text-emerald-600" />Anteprima Trascrizione Completa (Raw)</h3>
-            <div className="bg-white rounded border p-4 max-h-48 overflow-y-auto">
-              <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+          <div className="rounded-lg p-4" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <h3 style={{ fontWeight: 600, marginBottom: '0.75rem', color: '#0094B5', display: 'flex', alignItems: 'center', fontFamily: '"Syne", sans-serif' }}><FileText className="w-5 h-5 mr-2" style={{ color: '#0094B5' }} />Anteprima Trascrizione Completa (Raw)</h3>
+            <div className="rounded border p-4 max-h-48 overflow-y-auto" style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+              <p style={{ fontSize: '0.875rem', color: '#F3832C', whiteSpace: 'pre-wrap', lineHeight: '1.75' }}>
                 {recording.rawTranscript || recording.transcript}
               </p>
             </div>
           </div>
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold mb-3 text-gray-800 flex items-center"><Map className="w-5 h-5 mr-2 text-green-600" />Anteprima Markdown Strutturato</h3>
-            <div className="bg-white rounded border p-4 max-h-64 overflow-y-auto">
-              <pre className="whitespace-pre-wrap text-sm text-gray-700">{recording.transcript}</pre>
+          <div className="rounded-lg p-4" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <h3 style={{ fontWeight: 600, marginBottom: '0.75rem', color: '#0094B5', display: 'flex', alignItems: 'center', fontFamily: '"Syne", sans-serif' }}><Map className="w-5 h-5 mr-2" style={{ color: '#0094B5' }} />Anteprima Markdown Strutturato</h3>
+            <div className="rounded border p-4 max-h-64 overflow-y-auto" style={{ background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+              <pre style={{ whiteSpace: 'pre-wrap', fontSize: '0.875rem', color: '#F3832C' }}>{recording.transcript}</pre>
             </div>
+          </div>
+        </div>
+
+        {/* Footer with Credits */}
+        <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', textAlign: 'center', color: '#F3832C', fontSize: '0.875rem' }}>
+          <p style={{ marginBottom: '0.5rem', color: '#0094B5', fontSize: '0.875rem' }}>
+            APP realizzata da <strong style={{ color: '#0094B5' }}>Roberto Micarelli</strong>
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.75rem' }}>
+            <a
+              href="https://www.ai-utati.it"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#F3832C', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseEnter={(e) => e.target.style.color = '#0094B5'}
+              onMouseLeave={(e) => e.target.style.color = '#F3832C'}
+            >
+              https://www.ai-utati.it
+            </a>
+            <span style={{ color: '#666' }}>-</span>
+            <a
+              href="mailto:roberto@ai-utati.it"
+              style={{ color: '#F3832C', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseEnter={(e) => e.target.style.color = '#0094B5'}
+              onMouseLeave={(e) => e.target.style.color = '#F3832C'}
+            >
+              roberto@ai-utati.it
+            </a>
           </div>
         </div>
       </div>
@@ -437,7 +465,7 @@ Cordiali saluti
   // Se è selezionata una registrazione, mostra la vista dettagliata
   if (selectedRecording) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-4">
+      <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
         <div className="max-w-6xl mx-auto">
           <DetailView recording={selectedRecording} />
         </div>
@@ -447,28 +475,34 @@ Cordiali saluti
 
   // Vista principale
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-4">
+    <div className="min-h-screen p-4" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
       <div className="max-w-4xl mx-auto">
         {/* Header con pulsante Settings */}
         <div className="flex justify-between items-center mb-8">
           <div className="text-center flex-1">
-      <div className="flex items-center justify-center mb-4">
-  <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-    Voice Transcription Studio
-  </h1>
-  <img
-    src={`${process.env.PUBLIC_URL || ''}/logo192.png`}
-    alt="Logo"
-    className="ml-3"
-    style={{ height: '40px', width: 'auto' }}
-  />
-</div>
-
-            <p className="text-gray-600 text-lg">Registra, trascrivi e crea mappe mentali con AI</p>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1rem' }}>
+              <img 
+                src="/Icona-Notino.png"
+                alt="Notino Logo"
+                style={{ width: '120px', height: '120px', objectFit: 'contain', marginBottom: '0.5rem' }}
+              />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                <h1 style={{ fontFamily: '"Syne", sans-serif', fontSize: '3rem', fontWeight: 700, color: '#0094B5', margin: 0 }}>
+                  Voice Transcription Studio
+                </h1>
+              </div>
+            </div>
+            <p style={{ fontSize: '1.125rem', color: '#F3832C', maxWidth: '600px', margin: '0 auto' }}>
+              Registra, trascrivi e crea mappe mentali con AI
+            </p>
             {!apiKey ? (
-              <p className="text-red-600 text-sm mt-2 bg-red-50 p-2 rounded">⚠️ Configura API OpenAI nelle Impostazioni per la trascrizione automatica</p>
+              <p style={{ color: '#F3832C', fontSize: '0.875rem', marginTop: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', padding: '0.5rem', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+                ⚠️ Configura API OpenAI nelle Impostazioni per la trascrizione automatica
+              </p>
             ) : (
-              <p className="text-green-600 text-sm mt-2 bg-green-50 p-2 rounded">✅ API OpenAI configurata - Ready per trascrizioni automatiche!</p>
+              <p style={{ color: '#0094B5', fontSize: '0.875rem', marginTop: '0.5rem', background: 'rgba(16, 185, 129, 0.1)', padding: '0.5rem', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                ✅ API OpenAI configurata - Ready per trascrizioni automatiche!
+              </p>
             )}
           </div>
           <button
@@ -480,7 +514,7 @@ Cordiali saluti
         </div>
 
         {/* Recording Controls */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+        <div className="rounded-2xl shadow-xl p-8 mb-8" style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
           <div className="text-center">
             <div className="mb-6">
               <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-blue-500'} shadow-lg mb-4`}>
@@ -519,27 +553,27 @@ Cordiali saluti
         </div>
 
         {/* Storico Registrazioni */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-            <FileText className="w-6 h-6 mr-2 text-blue-600" /> Storico Registrazioni
+        <div className="rounded-2xl shadow-xl p-6" style={{ background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0094B5', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', fontFamily: '"Syne", sans-serif' }}>
+            <FileText className="w-6 h-6 mr-2" style={{ color: '#0094B5' }} /> Storico Registrazioni
           </h2>
           
           {recordings.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              <Mic className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-              <p className="text-xl">Nessuna registrazione presente</p>
-              <p>Inizia una nuova registrazione per vedere lo storico</p>
-              {!apiKey && <p className="text-red-500 text-sm mt-4 bg-red-50 p-3 rounded">💡 Ricorda di configurare l'API OpenAI nelle Impostazioni per la trascrizione automatica!</p>}
+            <div className="text-center py-12" style={{ color: '#F3832C' }}>
+              <Mic className="w-16 h-16 mx-auto mb-4" style={{ color: '#F3832C', opacity: 0.5 }} />
+              <p style={{ fontSize: '1.25rem', color: '#F3832C' }}>Nessuna registrazione presente</p>
+              <p style={{ color: '#F3832C' }}>Inizia una nuova registrazione per vedere lo storico</p>
+              {!apiKey && <p style={{ color: '#F3832C', fontSize: '0.875rem', marginTop: '1rem', background: 'rgba(239, 68, 68, 0.1)', padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>💡 Ricorda di configurare l'API OpenAI nelle Impostazioni per la trascrizione automatica!</p>}
             </div>
           ) : (
             <div className="space-y-4">
               {recordings.map((recording) => (
-                <div key={recording.id} className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 border border-gray-100">
+                <div key={recording.id} className="rounded-xl p-6" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
                   <div className="flex flex-col md:flex-row md:items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{recording.title}</h3>
-                      <p className="text-gray-600 mb-3 leading-relaxed">{recording.caption}</p>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0094B5', marginBottom: '0.5rem', fontFamily: '"Syne", sans-serif' }}>{recording.title}</h3>
+                      <p style={{ color: '#F3832C', marginBottom: '0.75rem', lineHeight: '1.75' }}>{recording.caption}</p>
+                      <div className="flex flex-wrap gap-4" style={{ fontSize: '0.875rem', color: '#F3832C' }}>
                         <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" />{recording.date}</span>
                         <span className="flex items-center"><Clock className="w-4 h-4 mr-1" />{recording.time}</span>
                         <span className="flex items-center"><Volume2 className="w-4 h-4 mr-1" />{recording.duration}</span>
@@ -656,6 +690,34 @@ Cordiali saluti
             className="hidden"
           />
         )}
+
+        {/* Footer with Credits */}
+        <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', textAlign: 'center', color: '#F3832C', fontSize: '0.875rem' }}>
+          <p style={{ marginBottom: '0.5rem', color: '#0094B5', fontSize: '0.875rem' }}>
+            APP realizzata da <strong style={{ color: '#0094B5' }}>Roberto Micarelli</strong>
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.75rem' }}>
+            <a
+              href="https://www.ai-utati.it"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#F3832C', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseEnter={(e) => e.target.style.color = '#0094B5'}
+              onMouseLeave={(e) => e.target.style.color = '#F3832C'}
+            >
+              https://www.ai-utati.it
+            </a>
+            <span style={{ color: '#666' }}>-</span>
+            <a
+              href="mailto:roberto@ai-utati.it"
+              style={{ color: '#F3832C', textDecoration: 'none', transition: 'color 0.3s ease' }}
+              onMouseEnter={(e) => e.target.style.color = '#0094B5'}
+              onMouseLeave={(e) => e.target.style.color = '#F3832C'}
+            >
+              roberto@ai-utati.it
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
