@@ -65,6 +65,6 @@ Il progetto è pronto per Vercel: collega il repository e il deploy parte a ogni
 
 ---
 
-**AI-utati** · By Roberto Micarelli · Formatore, Coach, Consulente · [ai-utati.it](https://www.ai-utati.it)
+**AI-utati** · By Roberto Micarelli · Formatore, Coach, Consulente · [ai-utati.it](https://www.ai-utati.it) · [Scheda sul sito](https://www.ai-utati.it/risorse/voice-transcription-studio/) · [Tutti i progetti](https://github.com/RobertoMicarelli/brand-ai-utati)
 
 **Provalo ora:** registra trenta secondi su un'idea che hai in testa e guarda che mappa ne esce.
